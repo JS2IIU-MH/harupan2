@@ -3,18 +3,22 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'constants/app_constants.dart';
+import 'providers/tutorial_provider.dart';
 import 'screens/camera_screen.dart';
+import 'screens/tutorial_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const ProviderScope(child: HarupanApp()));
 }
 
-class HarupanApp extends StatelessWidget {
+class HarupanApp extends ConsumerWidget {
   const HarupanApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tutorialAsync = ref.watch(tutorialCompletedProvider);
+
     return MaterialApp(
       title: 'はるぱん2',
       debugShowCheckedModeBanner: false,
@@ -35,7 +39,16 @@ class HarupanApp extends StatelessWidget {
         Locale('ja'),
       ],
       locale: const Locale('ja'),
-      home: const CameraScreen(),
+      home: tutorialAsync.when(
+        loading: () => const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(color: AppConstants.mainColor),
+          ),
+        ),
+        error: (_, __) => const CameraScreen(),
+        data: (completed) =>
+            completed ? const CameraScreen() : const TutorialScreen(),
+      ),
     );
   }
 }
