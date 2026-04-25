@@ -1,5 +1,6 @@
 # local
 train_*/
+documents/screenshots/
 
 # Miscellaneous
 *.class

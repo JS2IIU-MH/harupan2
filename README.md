@@ -9,6 +9,10 @@
 - **SNS シェア** — スクリーンショットと合計点をワンタップで共有
 - **前面/背面カメラ切替** — 使いやすい方のカメラで利用可能
 
+<img src="documents/Screenshot_1.png" width=300></a>
+<img src="documents/Screenshot_2.png" width=300></a>
+
+
 ## 対応シールと点数
 
 | シール | 点数 |
